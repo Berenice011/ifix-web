@@ -1,0 +1,129 @@
+/* =========================
+   ESTILOS GENERALES - ESCRITORIO
+   ========================= */
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top left, #0f172a, #1f2937);
+  color: #e0f7fa;
+}
+
+/* ENCABEZADO */
+header {
+  text-align: center;
+  background-color: #0f172a;
+  color: #00e676;
+  padding: 2em 1em 1em 1em;
+  box-shadow: 0 4px 12px rgba(0, 229, 255, 0.2);
+}
+
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5em;
+  text-shadow: 0 0 8px #00e676aa;
+}
+
+header p {
+  font-size: 1.1rem;
+  color: #b0e0e6;
+}
+
+/* SLIDER DE IMÁGENES */
+.slider {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 2em auto;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 229, 255, 0.2);
+}
+
+.slides {
+  display: flex;
+  transition: transform 1s ease;
+  width: 300%;
+}
+
+.slides img {
+  width: 100%;
+  height: auto;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+/* SECCIÓN DE VIDEOS */
+.videos {
+  max-width: 1000px;
+  margin: 3em auto;
+  padding: 0 1.5em;
+  text-align: center;
+}
+
+.videos h2 {
+  color: #00e676;
+  font-size: 1.8rem;
+  margin-bottom: 1.5em;
+  text-shadow: 0 0 10px #00e67633;
+}
+
+.videos video {
+  width: 100%;
+  max-width: 720px;
+  border: 4px solid #00e5ff;
+  border-radius: 12px;
+  margin-bottom: 2em;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+}
+
+/* FOOTER */
+footer {
+  background-color: #0f172a;
+  text-align: center;
+  padding: 1.5em 0;
+  margin-top: 4em;
+  color: #a0aec0;
+  font-size: 0.9rem;
+  border-top: 1px solid #2c3e50;
+}
+
+
+/* =========================
+   VERSIÓN MÓVIL - RESPONSIVE
+   ========================= */
+
+@media (max-width: 768px) {
+  header {
+    padding: 1.5em 1em 1em 1em;
+  }
+
+  header h1 {
+    font-size: 1.6rem;
+  }
+
+  header p {
+    font-size: 1rem;
+  }
+
+  .slides {
+    width: 300%;
+  }
+
+  .slides img {
+    height: auto;
+  }
+
+  .videos h2 {
+    font-size: 1.4rem;
+  }
+
+  .videos video {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  footer {
+    font-size: 0.85rem;
+  }
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Promociones y Videos - iFix</title>
+  <link rel="stylesheet" href="css/promociones.css" />
+</head>
+<body>
+  <header>
+    <h1>🎉 Conocenos </h1>
+    <p>Disfruta de nuestros servicios y conoce más sobre nuestros servicios en video.</p>
+  </header>
+
+  <main>
+    <!-- Slider de Imágenes -->
+    <section class="slider">
+      <div class="slides">
+        <img src="assets/promo1.jpg" alt="Promoción 1" />
+        <img src="assets/promo2.jpg" alt="Promoción 2" />
+        <img src="assets/promo3.jpg" alt="Promoción 3" />
+      </div>
+    </section>
+
+    <!-- Sección de Videos -->
+    <section class="videos">
+      <h2>🎥 Conoce iFix en Acción</h2>
+      <video src="assets/video1.mp4" controls autoplay muted></video>
+      <video src="assets/video2.mp4" controls autoplay muted></video>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 iFix Centro de Reparaciones</p>
+  </footer>
+
+  <script>
+    // Script del slider
+    const slides = document.querySelector(".slides");
+    let index = 0;
+
+    setInterval(() => {
+      index = (index + 1) % slides.children.length;
+      slides.style.transform = `translateX(-${index * 100}%)`;
+    }, 4000);
+  </script>
+</body>
+</html>

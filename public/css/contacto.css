@@ -1,0 +1,243 @@
+/* =========================
+   ESTILOS GENERALES
+   ========================= */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top left, #0f172a, #1f2937);
+  color: #e0f7fa;
+}
+
+/* =========================
+   ENCABEZADO
+   ========================= */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 2em;
+  background-color: #0f172a;
+  color: white;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+
+.logo-nombre {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.logo img {
+  height: 80px;
+  filter: drop-shadow(0 0 12px #00e5ff);
+  cursor: pointer;
+}
+
+.nombre-empresa {
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: #dddff0;
+  text-shadow: 0 0 8px #ffffffaa;
+  margin-left: 0.5em;
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+
+/* =========================
+   SECCIÓN CONTACTO
+   ========================= */
+.contacto-info {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2em;
+  padding: 4em 2em;
+  background-color: #1e293b;
+  text-align: center;
+}
+
+.contacto-tarjeta {
+  background-color: #0f172a;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 229, 255, 0.15);
+  padding: 2em 1.5em;
+  flex: 1 1 250px;
+  max-width: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contacto-tarjeta:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 229, 255, 0.3);
+}
+
+.icono-contacto {
+  font-size: 2.8rem;
+  color: #00e676;
+  margin-bottom: 0.8em;
+}
+
+.contacto-tarjeta h3 {
+  font-size: 1.4rem;
+  color: #00e676;
+  margin-bottom: 0.5em;
+  text-shadow: 0 0 10px #00e67633;
+}
+
+.contacto-tarjeta p {
+  font-size: 1rem;
+  color: #b0e0e6;
+  margin: 0.3em 0;
+}
+
+.contacto-tarjeta a {
+  color: #81d4fa;
+  text-decoration: none;
+}
+
+.contacto-tarjeta a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   NAVBAR
+   ========================= */
+.navbar {
+  display: flex;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5em;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: #e0f7fa;
+  font-weight: 600;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.navbar ul li a:hover,
+.navbar ul li a.activo {
+  color: #00e676;
+}
+
+.login-image-btn img {
+  height: 28px;
+  width: 28px;
+  filter: drop-shadow(0 0 5px #00e676);
+  border-radius: 6px;
+}
+
+/* FOOTER */
+
+footer {
+  background-color: #0f172a;
+  text-align: center;
+  padding: 1.5em 0;
+  margin-top: 4em;
+  color: #a0aec0;
+  font-size: 0.9rem;
+  border-top: 1px solid #2c3e50;
+}
+
+/* =========================
+   MENÚ MÓVIL - RESPONSIVE
+   ========================= */
+.menu-toggle {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 1em 1.5em;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .logo-nombre {
+    gap: 0.4em;
+  }
+
+  .logo img {
+    height: 70px;
+    filter: drop-shadow(0 0 8px #00e5ff);
+  }
+
+  .nombre-empresa {
+    font-size: 0.9rem;
+    max-width: 60vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .navbar {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #1e293b;
+    flex-direction: column;
+    transform: translateY(-200%);
+    transition: transform 0.3s ease;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    display: flex;
+  }
+
+  .navbar.active {
+    transform: translateY(0);
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em 0;
+  }
+
+  .navbar ul li a {
+    padding: 1em 2em;
+    width: 100%;
+  }
+
+  .contacto-info {
+    flex-direction: column;
+    align-items: center;
+    padding: 3em 1em;
+  }
+
+  .contacto-tarjeta {
+    width: 90%;
+    padding: 1.8em 1em;
+    margin-bottom: 1.5em;
+  }
+
+  .icono-contacto {
+    font-size: 2.5rem;
+  }
+
+  .contacto-tarjeta h3 {
+    font-size: 1.2rem;
+  }
+
+  .contacto-tarjeta p {
+    font-size: 0.95rem;
+  }
+}

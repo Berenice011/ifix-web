@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iFix - Panel Administrativo</title>
+  <link rel="stylesheet" href="css/admin.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- ENCABEZADO -->
+<header>
+  <div class="logo-nombre">
+    <div class="logo">
+      <img src="assets/logo.png" alt="Logo iFix" />
+    </div>
+    <div class="nombre-empresa">iFix - Panel Administrativo</div>
+  </div>
+</header>
+
+<main class="admin-panel">
+  <section class="formulario-folio">
+    <h2>Agregar nuevo folio de reparación</h2>
+    <form id="formAgregar">
+      <input type="text" name="folio" placeholder="Folio" required />
+      <select name="estado" required>
+        <option value="En reparación">En reparación</option>
+        <option value="Listo para recoger">Listo para recoger</option>
+      </select>
+      <button type="submit">Agregar Folio</button>
+    </form>
+  </section>
+
+  <section class="lista-folios">
+    <h3>Listado de Reparaciones</h3>
+    <ul id="listaFolios">
+      <!-- Aquí se cargarán los folios dinámicamente -->
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2025 iFix Centro de Reparaciones. Todos los derechos reservados.</p>
+</footer>
+
+<script src="js/admin.js"></script>
+</body>
+</html>

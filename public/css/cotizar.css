@@ -1,0 +1,189 @@
+/* =========================
+   ESTILOS GENERALES - ESCRITORIO
+   ========================= */
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top left, #0f172a, #1f2937);
+  color: #e0f7fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+  padding: 1em;
+  background-color: #0f172a;
+  color: white;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  gap: 0.5em;
+}
+
+header .logo img {
+  height: 80px;
+  filter: drop-shadow(0 0 12px #00e5ff);
+  cursor: pointer;
+}
+
+header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00e676;
+  text-shadow: 0 0 10px #00e676aa;
+}
+
+header p {
+  margin: 0;
+  font-size: 1rem;
+  color: #b0e0e6;
+  max-width: 500px;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 2em 1em;
+}
+
+section.formulario-solicitud {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  max-width: 800px;
+  width: 100%;
+  padding: 2em;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0, 229, 255, 0.2);
+}
+
+/* Fondo con logo */
+section.formulario-solicitud::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(30, 41, 59, 0.95);
+  background-image: url('../assets/logo.png'); /* Ajusta si está en otra carpeta */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 40%;
+  background-blend-mode: overlay;
+  z-index: 0;
+  border-radius: 16px;
+}
+
+section.formulario-solicitud form {
+  position: relative;
+  z-index: 1;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+input,
+select,
+textarea {
+  padding: 0.8em;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  background-color: #0f172a;
+  color: #e0f7fa;
+  box-shadow: 0 0 6px rgba(0, 229, 255, 0.2);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #a0aec0;
+}
+
+label {
+  font-weight: 600;
+  color: #00ffff;
+  margin-top: 1em;
+}
+
+.btn-principal {
+  padding: 1em;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(to right, #00e676, #00bfa5);
+  color: #0f172a;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 255, 150, 0.3);
+  transition: background 0.3s ease;
+  margin-top: 1em;
+}
+
+.btn-principal:hover {
+  background: linear-gradient(to right, #00c853, #00acc1);
+}
+
+footer {
+  background-color: #0f172a;
+  text-align: center;
+  padding: 1.5em 0;
+  color: #a0aec0;
+  font-size: 0.9rem;
+  border-top: 1px solid #2c3e50;
+}
+
+footer a {
+  color: #00e676;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   VERSIÓN MÓVIL - RESPONSIVE
+   ========================= */
+
+@media (max-width: 768px) {
+  header {
+    padding: 1em 1.5em;
+  }
+
+  header .logo img {
+    height: 70px;
+  }
+
+  header h2 {
+    font-size: 1.4rem;
+  }
+
+  header p {
+    font-size: 0.9rem;
+    max-width: 90vw;
+  }
+
+  main {
+    padding: 1em;
+  }
+
+  section.formulario-solicitud {
+    margin: 2em 0;
+    padding: 1.5em 1em;
+  }
+
+  .btn-principal {
+    font-size: 1rem;
+  }
+}

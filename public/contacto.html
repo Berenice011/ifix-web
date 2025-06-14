@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto - iFix Centro de Reparaciones</title>
+  <link rel="stylesheet" href="css/contacto.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+<!-- ENCABEZADO -->
+<header>
+  <div class="logo-nombre">
+    <div class="logo">
+      <img src="assets/logo.png" alt="logo" />
+    </div>
+    <div class="nombre-empresa">iFix Centro de Reparaciones</div>
+  </div>
+
+  <button class="menu-toggle">☰</button>
+  <nav class="navbar" id="nav">
+    <ul>
+      <li><a href="inicio.html" class="nav-elevadores">Inicio</a></li>
+      <li><a href="cotizar.html" class="nav-elevadores">Cotizar</a></li>
+      <li><a href="mireparacion.html" class="nav-elevadores">Mi Reparación</a></li>
+      <li><a href="sucursal.html" class="nav-elevadores">Sucursal</a></li>
+      <li><a href="contacto.html" class="nav-elevadores">contacto</a></li>
+      <li><a href="admin.html" class="login-image-btn">
+        <img src="assets/icono-usuario.png" alt="Admin" class="login-icon">
+      </a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- SECCIÓN DE CONTACTO CON ICONOS -->
+<section class="contacto-info">
+  <div class="contacto-tarjeta">
+    <div class="icono-contacto"><i class="fas fa-clock"></i></div>
+    <h3>Horarios.</h3>
+    <p><strong>Todos los días de la semana</strong><br>de 10:00 A.M. a 8:00 P.M.</p>
+  </div>
+
+  <div class="contacto-tarjeta">
+    <div class="icono-contacto"><i class="fas fa-phone-alt"></i></div>
+    <h3>Teléfono</h3>
+    <p>833 140 6829</p>
+  </div>
+
+  <div class="contacto-tarjeta">
+    <div class="icono-contacto"><i class="fas fa-envelope"></i></div>
+    <h3>E-mail.</h3>
+    <p><a href="mailto:sugerencias@ifix.com.mx">ifixreparaciones2025@gmail.com</a></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 iFix Centro de Reparaciones</p>
+</footer>
+
+<!-- JS para menú -->
+<script>
+  const toggleBtn = document.querySelector('.menu-toggle');
+  const navbar = document.querySelector('.navbar');
+  toggleBtn.addEventListener('click', () => {
+    navbar.classList.toggle('active');
+  });
+</script>
+
+</body>
+</html>

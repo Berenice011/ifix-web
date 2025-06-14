@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iFix - Centro de Reparaciones</title>
+  <link rel="stylesheet" href="css/inicio.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ENCABEZADO -->
+<header>
+  <div class="logo-nombre">
+    <div class="logo">
+      <img src="assets/logo.png" alt="logo" />
+    </div>
+    <div class="nombre-empresa">iFix Centro de Reparaciones</div>
+  </div>
+
+  <button class="menu-toggle">☰</button>
+  <nav class="navbar" id="nav">
+    <ul>
+      <li><a href="inicio.html" class="nav-ifix">Inicio</a></li>
+      <li><a href="cotizar.html" class="nav-ifix">Cotizar</a></li>
+      <li><a href="mireparacion.html" class="nav-ifix">Mi reparacion</a></li>
+      <li><a href="sucursal.html" class="nav-ifix">Sucursal</a></li>
+      <li><a href="novedades.html" class="nav-ifix">Novedades</a></li>
+      <li><a href="contacto.html" class="nav-ifix">Contacto</a></li>
+      <li><a href="login.html" class="login-image-btn">
+        <img src="assets/icono-usuario.png" alt="Admin" class="login-icon">
+      </a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- SECCIÓN QUIÉNES SOMOS -->
+<section class="quienes-somos">
+  <img src="fondos/fondo-4.jpg" alt="Fondo" class="fondo-imagen">
+  <div class="contenido">
+    <h2>¿Quiénes Somos?</h2>
+    <p>
+      <strong>iFix Centro de Reparaciones</strong> es tu aliado confiable para devolverle la vida a tus dispositivos. 
+      Nos especializamos en <span class="resaltado">reparaciones profesionales</span> de teléfonos, laptops y consolas, con un enfoque en calidad, rapidez y atención al cliente.
+    </p>
+    <p>
+      Nuestro equipo está formado por técnicos <span class="resaltado">altamente capacitados</span> que utilizan tecnología de punta y refacciones originales. 
+      Trabajamos con pasión y precisión para que tus equipos vuelvan a funcionar como nuevos.
+    </p>
+    <p class="frase-final">Tu confianza, nuestra prioridad. ⚡</p>
+  </div>
+</section>
+
+<!-- SECCIÓN SERVICIOS -->
+<section id="Servicios">
+  <h2 style="text-align: center;">Nuestros Servicios</h2>
+  <div class="fila">
+    <div class="columna">
+      <img src="servicios/iphone.webp" alt="Reparación de Teléfonos" class="icono" />
+      <h3>Teléfonos</h3>
+      <p>Pantallas, baterías, puertos de carga y más.</p>
+    </div>
+    <div class="columna">
+      <img src="servicios/smarthwatch.webp" alt="Reparación de smarthwatch" class="icono" />
+      <h3>smarthwatch</h3>
+      <p>Formateo, limpieza, cambios de teclado, SSDs.</p>
+    </div>
+    <div class="columna">
+      <img src="servicios/tablet.jpg" alt="Tablets" class="icono" />
+      <h3>Tablets</h3>
+      <p>Mantenimiento, limpieza interna, puertos HDMI.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 iFix Centro de Reparaciones</p>
+</footer>
+
+<!-- SCRIPT MENÚ RESPONSIVE -->
+<script>
+  const toggleBtn = document.querySelector('.menu-toggle');
+  const navbar = document.querySelector('.navbar');
+
+  toggleBtn.addEventListener('click', () => {
+    navbar.classList.toggle('active');
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iFix - Panel Administrativo</title>
+  <link rel="stylesheet" href="css/mireparacion.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- ENCABEZADO -->
+<header>
+  <div class="logo-nombre">
+    <div class="logo">
+      <img src="assets/logo.png" alt="Logo iFix" />
+    </div>
+    <div class="nombre-empresa">iFix - Mi Reparacion 🔧 </div>
+  </div>
+</header>
+<body>
+  <h2>Consultar Reparación</h2>
+  <form id="buscarFolio">
+    <input type="text" id="folio" placeholder="Ingresa tu folio" required />
+    <button type="submit">Consultar</button>
+  </form>
+  <p id="resultado"></p>
+
+  <script>
+    const form = document.getElementById('buscarFolio');
+    const resultado = document.getElementById('resultado');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const folio = document.getElementById('folio').value;
+      const res = await fetch(`/api/folios/${folio}`);
+      if (res.ok) {
+        const data = await res.json();
+        resultado.textContent = `🔧 Estado de tu reparación: ${data.estado}`;
+      } else {
+        resultado.textContent = '❌ Folio no encontrado.';
+      }
+    });
+  </script>
+</body>
+</html>

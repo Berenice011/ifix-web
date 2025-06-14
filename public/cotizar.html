@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cotizar Reparación - iFix</title>
+    <link rel="stylesheet" href="css/cotizar.css" />
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="assets/logo.png" alt="Logo iFix" />
+        </div>
+        <h2>📋 Solicita tu Cotización</h2>
+        <p>Llena el formulario para que podamos ayudarte con una reparación precisa y rápida.</p>
+    </header>
+
+    <main>
+        <section class="formulario-solicitud">
+            <form id="formCotizacion" action="/enviar-solicitud" method="post" enctype="multipart/form-data">
+                <label for="nombre">Nombre Completo:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required />
+
+                <label for="telefono">Número de Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="Tu número de teléfono" required />
+
+                <label for="correo">Correo electrónico de contacto:</label>
+                <input type="email" id="correo" name="correo" placeholder="tuemail@ejemplo.com" required />
+
+                <label for="modelo">Modelo del dispositivo (Ej. iPhone 13, Samsung A32...):</label>
+                <input type="text" id="modelo" name="modelo" placeholder="Modelo del dispositivo" required />
+
+                <label for="problema">Selecciona el tipo de problema:</label>
+                <select id="problema" name="problema" required>
+                    <option value="" disabled selected>Selecciona el tipo de problema</option>
+                    <option value="Pantalla rota">Pantalla rota</option>
+                    <option value="Batería agotada">Batería agotada</option>
+                    <option value="No carga">No carga</option>
+                    <option value="Otro">Otro</option>
+                </select>
+
+                <label for="imagen">Adjuntar imágenes del dispositivo (máx. 5):</label>
+                <input type="file" id="imagen" name="imagen" accept="image/*" multiple />
+
+                <label for="descripcion">Descripción detallada del problema:</label>
+                <textarea id="descripcion" name="descripcion" placeholder="Describe con más detalle el problema..." rows="5" required></textarea>
+
+                <button type="submit" class="btn-principal">Enviar Solicitud</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 iFix Centro de Reparaciones</p>
+    </footer>
+</body>
+</html>
