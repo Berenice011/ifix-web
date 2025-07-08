@@ -7,17 +7,25 @@ const PDFDocument = require('pdfkit');
 const fs = require('fs');
 const path = require('path');
 const nodemailer = require('nodemailer');
+const { Pool } = require('pg');
 
 const app = express();
 const PORT = 3000;
-const FOLIOS_FILE = path.join(__dirname, 'data', 'folios.json');
+
+// PostgreSQL config
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Multer config para subir imágenes
+// Multer config para imágenes
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const dir = path.join(__dirname, 'public', 'images');
@@ -31,17 +39,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// Funciones para leer y escribir folios
-function readFolios() {
-  if (!fs.existsSync(FOLIOS_FILE)) fs.writeFileSync(FOLIOS_FILE, '[]');
-  return JSON.parse(fs.readFileSync(FOLIOS_FILE, 'utf8'));
-}
-function writeFolios(data) {
-  fs.writeFileSync(FOLIOS_FILE, JSON.stringify(data, null, 2));
-}
-
-// --- Rutas básicas ---
-
+// --- RUTAS BÁSICAS ---
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'inicio.html'));
 });
@@ -57,46 +55,80 @@ app.post('/login', (req, res) => {
   }
 });
 
-// --- API para folios ---
+// --- API CON BASE DE DATOS POSTGRESQL ---
 
-app.get('/api/folios', (req, res) => {
-  res.json(readFolios());
-});
-app.get('/api/folios/:folio', (req, res) => {
-  const folios = readFolios();
-  const item = folios.find(f => f.folio === req.params.folio);
-  if (item) res.json(item);
-  else res.status(404).json({ error: 'Folio no encontrado' });
-});
-app.post('/api/folios', (req, res) => {
-  const { folio, estado } = req.body;
-  const folios = readFolios();
-  if (folios.find(f => f.folio === folio)) {
-    return res.status(400).json({ error: 'Folio duplicado' });
-  }
-  folios.push({ folio, estado });
-  writeFolios(folios);
-  res.json({ success: true });
-});
-app.put('/api/folios/:folio', (req, res) => {
-  const folios = readFolios();
-  const index = folios.findIndex(f => f.folio === req.params.folio);
-  if (index !== -1) {
-    folios[index].estado = req.body.estado;
-    writeFolios(folios);
+// Crear nuevo folio
+app.post('/api/folios', async (req, res) => {
+  const { folio, nombre_completo, numero_contacto, dispositivo, estado } = req.body;
+  try {
+    await pool.query(
+      'INSERT INTO folios (folio, nombre_completo, numero_contacto, dispositivo, estado) VALUES ($1, $2, $3, $4, $5)',
+      [folio, nombre_completo, numero_contacto, dispositivo, estado]
+    );
     res.json({ success: true });
-  } else {
-    res.status(404).json({ error: 'Folio no encontrado' });
+  } catch (error) {
+    console.error('Error al insertar folio:', error);
+    res.status(500).json({ error: 'Error al guardar folio' });
   }
 });
-app.delete('/api/folios/:folio', (req, res) => {
-  let folios = readFolios();
-  folios = folios.filter(f => f.folio !== req.params.folio);
-  writeFolios(folios);
-  res.json({ success: true });
+
+// Obtener todos los folios
+app.get('/api/folios', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM folios ORDER BY id DESC');
+    res.json(result.rows);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener folios' });
+  }
 });
 
-// --- NUEVO: Recibir formulario, generar PDF y enviar correo ---
+// Obtener folio por ID
+app.get('/api/folios/:folio', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM folios WHERE folio = $1', [req.params.folio]);
+    if (result.rows.length > 0) {
+      res.json(result.rows[0]);
+    } else {
+      res.status(404).json({ error: 'Folio no encontrado' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Error al buscar folio' });
+  }
+});
+
+// Actualizar estado
+app.put('/api/folios/:folio', async (req, res) => {
+  const { estado } = req.body;
+  try {
+    const result = await pool.query(
+      'UPDATE folios SET estado = $1 WHERE folio = $2',
+      [estado, req.params.folio]
+    );
+    if (result.rowCount > 0) {
+      res.json({ success: true });
+    } else {
+      res.status(404).json({ error: 'Folio no encontrado' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Error al actualizar folio' });
+  }
+});
+
+// Eliminar folio
+app.delete('/api/folios/:folio', async (req, res) => {
+  try {
+    const result = await pool.query('DELETE FROM folios WHERE folio = $1', [req.params.folio]);
+    if (result.rowCount > 0) {
+      res.json({ success: true });
+    } else {
+      res.status(404).json({ error: 'Folio no encontrado' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Error al eliminar folio' });
+  }
+});
+
+// --- PDF y envío de correo (cotización) ---
 
 function crearPDF(datos, rutaArchivo) {
   return new Promise((resolve, reject) => {
@@ -137,7 +169,6 @@ app.post('/enviar-solicitud', upload.array('imagen', 5), async (req, res) => {
 
     await crearPDF({ nombre, telefono, correo, modelo, problema, descripcion }, pdfPath);
 
-    // Configurar nodemailer con datos en .env
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -146,7 +177,6 @@ app.post('/enviar-solicitud', upload.array('imagen', 5), async (req, res) => {
       },
     });
 
-    // Adjuntos: pdf + imágenes
     const attachments = [
       { filename: 'Solicitud.pdf', path: pdfPath },
       ...archivos.map(f => ({ filename: f.originalname, path: f.path })),
@@ -165,7 +195,6 @@ app.post('/enviar-solicitud', upload.array('imagen', 5), async (req, res) => {
 
     await transporter.sendMail(mailOptions);
 
-    // Limpieza archivos temporales
     fs.unlink(pdfPath, () => {});
     archivos.forEach(f => fs.unlink(f.path, () => {}));
 
@@ -176,8 +205,18 @@ app.post('/enviar-solicitud', upload.array('imagen', 5), async (req, res) => {
   }
 });
 
-// Iniciar servidor
+app.get('/test-db', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT NOW()');
+    res.send(`🟢 Conexión exitosa. Hora del servidor: ${result.rows[0].now}`);
+  } catch (err) {
+    console.error('❌ Error de conexión con la base de datos:', err);
+    res.status(500).send('Error al conectar con la base de datos');
+  }
+});
+
+
+// --- Iniciar servidor ---
 app.listen(PORT, () => {
   console.log(`🟢 Servidor corriendo en: http://localhost:${PORT}`);
-  console.log(`🌐 Abre en navegador: http://localhost:${PORT}/`);
 });

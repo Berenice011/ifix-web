@@ -11,7 +11,6 @@
 </head>
 <body>
 
-<!-- ENCABEZADO -->
 <header>
   <div class="logo-nombre">
     <div class="logo">
@@ -26,6 +25,9 @@
     <h2>Agregar nuevo folio de reparación</h2>
     <form id="formAgregar">
       <input type="text" name="folio" placeholder="Folio" required />
+      <input type="text" name="nombre_completo" placeholder="Nombre completo" required />
+      <input type="text" name="numero_contacto" placeholder="Número de contacto" required />
+      <input type="text" name="dispositivo" placeholder="Dispositivo" required />
       <select name="estado" required>
         <option value="En reparación">En reparación</option>
         <option value="Listo para recoger">Listo para recoger</option>
@@ -36,9 +38,7 @@
 
   <section class="lista-folios">
     <h3>Listado de Reparaciones</h3>
-    <ul id="listaFolios">
-      <!-- Aquí se cargarán los folios dinámicamente -->
-    </ul>
+    <ul id="listaFolios"></ul>
   </section>
 </main>
 

@@ -43,14 +43,15 @@ header p {
 .slides {
   display: flex;
   transition: transform 1s ease;
-  width: 300%;
+  width: 100%;
 }
 
 .slides img {
   width: 100%;
-  height: auto;
-  flex-shrink: 0;
+  max-height: 1000px;         /* Limita la altura en escritorio */
   object-fit: cover;
+  border-radius: 16px;
+  flex-shrink: 0;
 }
 
 /* SECCIÓN DE VIDEOS */
@@ -88,7 +89,6 @@ footer {
   border-top: 1px solid #2c3e50;
 }
 
-
 /* =========================
    VERSIÓN MÓVIL - RESPONSIVE
    ========================= */
@@ -106,12 +106,15 @@ footer {
     font-size: 1rem;
   }
 
-  .slides {
-    width: 300%;
+  .slider {
+    max-width: 100%;
+    margin: 1.5em auto;
+    border-radius: 12px;
   }
 
   .slides img {
-    height: auto;
+    max-height: 500px;      /* Altura reducida en móviles */
+    border-radius: 12px;
   }
 
   .videos h2 {

@@ -31,7 +31,7 @@ header {
 
 .logo img {
   height: 80px;
-  filter: drop-shadow(0 0 12px #00e5ff);
+  filter: drop-shadow(0 0 12px #0d7a86);
   cursor: pointer;
 }
 
@@ -178,7 +178,7 @@ footer {
 
   .logo img {
     height: 70px;
-    filter: drop-shadow(0 0 8px #00e5ff);
+    filter: drop-shadow(0 0 8px #0d7a86);
   }
 
   .nombre-empresa {

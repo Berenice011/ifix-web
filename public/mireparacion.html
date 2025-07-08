@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>iFix - Panel Administrativo</title>
+  <title>iFix - Mi Reparación</title>
   <link rel="stylesheet" href="css/mireparacion.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,32 +17,53 @@
     <div class="logo">
       <img src="assets/logo.png" alt="Logo iFix" />
     </div>
-    <div class="nombre-empresa">iFix - Mi Reparacion 🔧 </div>
+    <div class="nombre-empresa">iFix - Mi Reparación 🔧</div>
   </div>
 </header>
-<body>
-  <h2>Consultar Reparación</h2>
-  <form id="buscarFolio">
-    <input type="text" id="folio" placeholder="Ingresa tu folio" required />
-    <button type="submit">Consultar</button>
-  </form>
-  <p id="resultado"></p>
 
-  <script>
-    const form = document.getElementById('buscarFolio');
-    const resultado = document.getElementById('resultado');
+<!-- CONSULTA DE FOLIO -->
+<main>
+  <section class="consulta">
+    <h2>Consultar Reparación</h2>
+    <form id="buscarFolio">
+      <input type="text" id="folio" placeholder="Ingresa tu folio" required />
+      <button type="submit">Consultar</button>
+    </form>
+    <div id="resultado"></div>
+  </section>
+</main>
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const folio = document.getElementById('folio').value;
+<!-- SCRIPTS -->
+<script>
+  const form = document.getElementById('buscarFolio');
+  const resultado = document.getElementById('resultado');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const folio = document.getElementById('folio').value.trim();
+
+    if (!folio) {
+      resultado.innerHTML = '<p style="color:red;">⚠️ Ingresa un folio válido.</p>';
+      return;
+    }
+
+    try {
       const res = await fetch(`/api/folios/${folio}`);
       if (res.ok) {
         const data = await res.json();
-        resultado.textContent = `🔧 Estado de tu reparación: ${data.estado}`;
+        resultado.innerHTML = `
+          <p><strong>📄 Cliente:</strong> ${data.nombre_completo}</p>
+          <p><strong>🔧 Estado:</strong> ${data.estado}</p>
+        `;
       } else {
-        resultado.textContent = '❌ Folio no encontrado.';
+        resultado.innerHTML = '<p style="color:red;">❌ Folio no encontrado.</p>';
       }
-    });
-  </script>
+    } catch (error) {
+      console.error('Error:', error);
+      resultado.innerHTML = '<p style="color:red;">⚠️ Error al consultar el folio.</p>';
+    }
+  });
+</script>
+
 </body>
 </html>
